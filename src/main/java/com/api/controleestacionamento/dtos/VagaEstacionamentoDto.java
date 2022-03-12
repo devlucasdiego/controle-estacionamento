@@ -6,84 +6,84 @@ import javax.validation.constraints.Size;
 public class VagaEstacionamentoDto {
 
     @NotBlank
-    private String parkingSpotNumber;
+    private String numeroVaga;
     @NotBlank
     @Size(max = 7)
-    private String licensePlateCar;
+    private String placaCarro;
     @NotBlank
-    private String brandCar;
+    private String marcaCarro;
     @NotBlank
-    private String modelCar;
+    private String modeloCarro;
     @NotBlank
-    private String colorCar;
+    private String corCarro;
     @NotBlank
-    private String responsibleName;
+    private String nomeResponsavel;
     @NotBlank
-    private String apartment;
+    private String apartamento;
     @NotBlank
-    private String block;
+    private String bloco;
 
-    public String getParkingSpotNumber() {
-        return parkingSpotNumber;
+    public String getNumeroVaga() {
+        return numeroVaga;
     }
 
-    public void setParkingSpotNumber(String parkingSpotNumber) {
-        this.parkingSpotNumber = parkingSpotNumber;
+    public void setNumeroVaga(String numeroVaga) {
+        this.numeroVaga = numeroVaga;
     }
 
-    public String getLicensePlateCar() {
-        return licensePlateCar;
+    public String getPlacaCarro() {
+        return placaCarro;
     }
 
-    public void setLicensePlateCar(String licensePlateCar) {
-        this.licensePlateCar = licensePlateCar;
+    public void setPlacaCarro(String placaCarro) {
+        this.placaCarro = placaCarro;
     }
 
-    public String getBrandCar() {
-        return brandCar;
+    public String getMarcaCarro() {
+        return marcaCarro;
     }
 
-    public void setBrandCar(String brandCar) {
-        this.brandCar = brandCar;
+    public void setMarcaCarro(String marcaCarro) {
+        this.marcaCarro = marcaCarro;
     }
 
-    public String getModelCar() {
-        return modelCar;
+    public String getModeloCarro() {
+        return modeloCarro;
     }
 
-    public void setModelCar(String modelCar) {
-        this.modelCar = modelCar;
+    public void setModeloCarro(String modeloCarro) {
+        this.modeloCarro = modeloCarro;
     }
 
-    public String getColorCar() {
-        return colorCar;
+    public String getCorCarro() {
+        return corCarro;
     }
 
-    public void setColorCar(String colorCar) {
-        this.colorCar = colorCar;
+    public void setCorCarro(String corCarro) {
+        this.corCarro = corCarro;
     }
 
-    public String getResponsibleName() {
-        return responsibleName;
+    public String getNomeResponsavel() {
+        return nomeResponsavel;
     }
 
-    public void setResponsibleName(String responsibleName) {
-        this.responsibleName = responsibleName;
+    public void setNomeResponsavel(String nomeResponsavel) {
+        this.nomeResponsavel = nomeResponsavel;
     }
 
-    public String getApartment() {
-        return apartment;
+    public String getApartamento() {
+        return apartamento;
     }
 
-    public void setApartment(String apartment) {
-        this.apartment = apartment;
+    public void setApartamento(String apartamento) {
+        this.apartamento = apartamento;
     }
 
-    public String getBlock() {
-        return block;
+    public String getBloco() {
+        return bloco;
     }
 
-    public void setBlock(String block) {
-        this.block = block;
+    public void setBloco(String bloco) {
+        this.bloco = bloco;
     }
 }

@@ -1,9 +1,16 @@
 package com.api.controleestacionamento.controllers;
 
+import com.api.controleestacionamento.dtos.VagaEstacionamentoDto;
+import com.api.controleestacionamento.models.VagaEstacionamentoModel;
 import com.api.controleestacionamento.services.VagaEstacionamentoService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -15,5 +22,13 @@ public class VagaEstacionamentoController {
 
     public VagaEstacionamentoController(VagaEstacionamentoService vagaEstacionamentoService) {
         this.vagaEstacionamentoService = vagaEstacionamentoService;
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> saveVagaEstacionamento(@RequestBody @Valid VagaEstacionamentoDto vagaEstacionamentoDto) {
+        var vagaEstacionamentoModel = new VagaEstacionamentoModel();
+        BeanUtils.copyProperties(vagaEstacionamentoDto, vagaEstacionamentoModel);
+        vagaEstacionamentoModel.setDataRegistro(LocalDateTime.now(ZoneId.of("UTC")));
+        return ResponseEntity.status(HttpStatus.CREATED).body(vagaEstacionamentoService.save(vagaEstacionamentoModel));
     }
 }
