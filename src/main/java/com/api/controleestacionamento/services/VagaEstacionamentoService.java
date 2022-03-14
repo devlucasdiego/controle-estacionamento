@@ -2,7 +2,6 @@ package com.api.controleestacionamento.services;
 
 import com.api.controleestacionamento.models.VagaEstacionamentoModel;
 import com.api.controleestacionamento.repositories.VagaEstacionamentoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,5 +18,17 @@ public class VagaEstacionamentoService {
     @Transactional
     public VagaEstacionamentoModel save(VagaEstacionamentoModel vagaEstacionamentoModel) {
         return vagaEstacionamentoRepository.save(vagaEstacionamentoModel);
+    }
+
+    public boolean existsByPlacaCarro(String placaCarro) {
+        return vagaEstacionamentoRepository.existsByPlacaCarro(placaCarro);
+    }
+
+    public boolean existsByNumeroVaga(String numeroVaga) {
+        return vagaEstacionamentoRepository.existsByNumeroVaga(numeroVaga);
+    }
+
+    public boolean existsByApartamentoAndBloco(String apartamento, String bloco) {
+        return vagaEstacionamentoRepository.existsByApartamentoAndBloco(apartamento, bloco);
     }
 }

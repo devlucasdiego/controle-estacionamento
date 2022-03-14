@@ -26,6 +26,15 @@ public class VagaEstacionamentoController {
 
     @PostMapping
     public ResponseEntity<Object> saveVagaEstacionamento(@RequestBody @Valid VagaEstacionamentoDto vagaEstacionamentoDto) {
+        if (vagaEstacionamentoService.existsByPlacaCarro(vagaEstacionamentoDto.getPlacaCarro())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Placa do Carro já está em uso! ");
+        }
+        if (vagaEstacionamentoService.existsByNumeroVaga(vagaEstacionamentoDto.getNumeroVaga())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("A vaga de estacionamento já está em uso!");
+        }
+        if (vagaEstacionamentoService.existsByApartamentoAndBloco(vagaEstacionamentoDto.getApartamento(), vagaEstacionamentoDto.getBloco())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Vaga já registrada para este apartamento/bloco! ");
+        }
         var vagaEstacionamentoModel = new VagaEstacionamentoModel();
         BeanUtils.copyProperties(vagaEstacionamentoDto, vagaEstacionamentoModel);
         vagaEstacionamentoModel.setDataRegistro(LocalDateTime.now(ZoneId.of("UTC")));
