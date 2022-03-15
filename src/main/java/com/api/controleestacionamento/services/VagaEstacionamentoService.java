@@ -2,9 +2,12 @@ package com.api.controleestacionamento.services;
 
 import com.api.controleestacionamento.models.VagaEstacionamentoModel;
 import com.api.controleestacionamento.repositories.VagaEstacionamentoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class VagaEstacionamentoService {
@@ -30,5 +33,9 @@ public class VagaEstacionamentoService {
 
     public boolean existsByApartamentoAndBloco(String apartamento, String bloco) {
         return vagaEstacionamentoRepository.existsByApartamentoAndBloco(apartamento, bloco);
+    }
+
+    public Page<VagaEstacionamentoModel> findAll(Pageable pageable) {
+        return vagaEstacionamentoRepository.findAll(pageable);
     }
 }

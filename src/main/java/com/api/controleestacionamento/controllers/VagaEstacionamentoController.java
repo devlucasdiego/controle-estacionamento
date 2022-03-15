@@ -4,6 +4,10 @@ import com.api.controleestacionamento.dtos.VagaEstacionamentoDto;
 import com.api.controleestacionamento.models.VagaEstacionamentoModel;
 import com.api.controleestacionamento.services.VagaEstacionamentoService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,5 +43,10 @@ public class VagaEstacionamentoController {
         BeanUtils.copyProperties(vagaEstacionamentoDto, vagaEstacionamentoModel);
         vagaEstacionamentoModel.setDataRegistro(LocalDateTime.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(vagaEstacionamentoService.save(vagaEstacionamentoModel));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<VagaEstacionamentoModel>> getAllVagasEstacionamentos(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+        return ResponseEntity.status(HttpStatus.OK).body(vagaEstacionamentoService.findAll(pageable));
     }
 }
