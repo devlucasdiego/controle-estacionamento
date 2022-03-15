@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -48,5 +50,14 @@ public class VagaEstacionamentoController {
     @GetMapping
     public ResponseEntity<Page<VagaEstacionamentoModel>> getAllVagasEstacionamentos(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK).body(vagaEstacionamentoService.findAll(pageable));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneVagaEstacionamento(@PathVariable(value = "id") UUID id) {
+        Optional<VagaEstacionamentoModel> vagaEstacionamentoModelOptional = vagaEstacionamentoService.findById(id);
+        if (!vagaEstacionamentoModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Vaga de estacionamento não encontrada.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(vagaEstacionamentoModelOptional.get());
     }
 }

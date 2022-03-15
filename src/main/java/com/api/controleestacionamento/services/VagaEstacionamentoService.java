@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class VagaEstacionamentoService {
@@ -37,5 +39,9 @@ public class VagaEstacionamentoService {
 
     public Page<VagaEstacionamentoModel> findAll(Pageable pageable) {
         return vagaEstacionamentoRepository.findAll(pageable);
+    }
+
+    public Optional<VagaEstacionamentoModel> findById(UUID id) {
+        return vagaEstacionamentoRepository.findById(id);
     }
 }
