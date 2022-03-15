@@ -44,4 +44,9 @@ public class VagaEstacionamentoService {
     public Optional<VagaEstacionamentoModel> findById(UUID id) {
         return vagaEstacionamentoRepository.findById(id);
     }
+
+    @Transactional
+    public void delete(VagaEstacionamentoModel vagaEstacionamentoModel) {
+        vagaEstacionamentoRepository.delete(vagaEstacionamentoModel);
+    }
 }

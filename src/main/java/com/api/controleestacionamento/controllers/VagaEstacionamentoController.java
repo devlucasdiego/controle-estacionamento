@@ -60,4 +60,14 @@ public class VagaEstacionamentoController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(vagaEstacionamentoModelOptional.get());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteVagaEstacionamento(@PathVariable(value = "id") UUID id) {
+        Optional<VagaEstacionamentoModel> parkingSpotModelOptional = vagaEstacionamentoService.findById(id);
+        if (!parkingSpotModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Vaga de estacionamento não encontrada.");
+        }
+        vagaEstacionamentoService.delete(parkingSpotModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Vaga de estacionamento excluída com sucesso.");
+    }
 }
