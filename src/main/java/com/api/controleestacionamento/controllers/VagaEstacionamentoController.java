@@ -70,4 +70,17 @@ public class VagaEstacionamentoController {
         vagaEstacionamentoService.delete(parkingSpotModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Vaga de estacionamento excluída com sucesso.");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateVagaEstacionamento(@PathVariable(value = "id") UUID id, @RequestBody @Valid VagaEstacionamentoDto vagaEstacionamentoDto) {
+        Optional<VagaEstacionamentoModel> vagaEstacionamentoModelOptional = vagaEstacionamentoService.findById(id);
+        if (!vagaEstacionamentoModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Vaga de estacionamento não encontrada.");
+        }
+        var vagaEstacionamentoModel = new VagaEstacionamentoModel();
+        BeanUtils.copyProperties(vagaEstacionamentoDto, vagaEstacionamentoModel);
+        vagaEstacionamentoModel.setId(vagaEstacionamentoModelOptional.get().getId());
+        vagaEstacionamentoModel.setDataRegistro(vagaEstacionamentoModelOptional.get().getDataRegistro());
+        return ResponseEntity.status(HttpStatus.OK).body(vagaEstacionamentoService.save(vagaEstacionamentoModel));
+    }
 }
