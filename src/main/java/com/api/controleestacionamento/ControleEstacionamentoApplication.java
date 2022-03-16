@@ -15,6 +15,6 @@ public class ControleEstacionamentoApplication {
 
     @GetMapping("/")
     public String index() {
-        return "Olá Mundo!";
+        return "Teste!";
     }
 }
